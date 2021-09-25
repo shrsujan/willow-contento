@@ -8,7 +8,6 @@ interface IButton {
 
 const Button = styled.button<IButton>`
   width: ${(props) => (props.fullWidth ? '100%' : 'auto')};
-  height: 40px;
   border: none;
   display: flex;
   cursor: pointer;
@@ -31,6 +30,8 @@ const Button = styled.button<IButton>`
     switch (props.variant) {
       case 'post':
         return `
+          width: 146px;
+          height: 56px;
           font-weight: 600;
           border-radius: 28px;
           color: ${props.theme.palette.headerText};
@@ -39,6 +40,7 @@ const Button = styled.button<IButton>`
 
       default:
         return `
+          height: 40px;
           font-weight: normal;
           border-radius: 8px;
           background-color: transparent;

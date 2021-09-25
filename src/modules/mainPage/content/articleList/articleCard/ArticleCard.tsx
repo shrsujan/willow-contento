@@ -3,19 +3,33 @@ import styled from 'styled-components';
 
 import { IArticle } from 'response';
 
-const Card = styled.div`
+import Actions from './actions';
+
+interface ICard {
+  image: string;
+}
+
+const Card = styled.div<ICard>`
   display: flex;
   flex-direction: column;
 
   .image__container {
     height: 228px;
     max-width: 100%;
+    border-radius: 12px;
+    background-image: url(${(props) => props.image});
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 12px;
+    > div {
+      display: none;
+    }
+
+    &:hover {
+      > div {
+        display: flex;
+      }
     }
   }
 
@@ -30,7 +44,7 @@ const Card = styled.div`
       width: 20px;
       height: 20px;
       border-radius: 16px;
-      border: 1px solid #1111111f;
+      border: 1px solid ${(props) => props.theme.palette.blackBorder};
     }
 
     h4 {
@@ -73,9 +87,9 @@ const ArticleCard: React.FC<IArticleCard> = ({ article }) => {
   const { icon, image, title, sourceTitle, description } = article;
 
   return (
-    <Card>
+    <Card image={image}>
       <div className="image__container">
-        <img src={image} alt={title} />
+        <Actions />
       </div>
       <div className="source">
         <img src={icon} alt={title} />
