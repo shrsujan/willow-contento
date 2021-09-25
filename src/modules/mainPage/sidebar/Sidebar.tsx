@@ -13,18 +13,10 @@ const TopNav = styled.div`
 const FilterNav = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
   margin-top: 21px;
+  flex-direction: column;
   padding-bottom: 40.5px;
   border-bottom: 1px ${(props) => props.theme.palette.boxShadow} solid;
-
-  h3 {
-    font-size: 16px;
-    color: #bcbcbc;
-    font-weight: 600;
-    letter-spacing: 0.52px;
-    margin-bottom: 12px;
-  }
 `;
 
 const SidebarFooter = styled.div`

@@ -9,17 +9,6 @@ import clockIcon from 'assets/icons/clock.svg';
 import handpickedIcon from 'assets/icons/handpicked.svg';
 import twitterIcon from 'assets/icons/twitter.svg';
 
-const Wrapper = styled.div`
-  width: 16px;
-  height: 16px;
-  margin-right: 12px;
-
-  img {
-    height: 100%;
-    width: 100%;
-  }
-`;
-
 const ICONS = {
   home: {
     src: homeIcon,
@@ -50,6 +39,17 @@ const ICONS = {
     defaultAlt: 'Twitter',
   },
 };
+
+const Wrapper = styled.div`
+  width: 16px;
+  height: 16px;
+  margin-right: 12px;
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+`;
 
 interface INavIcon {
   alt?: string;

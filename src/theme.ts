@@ -8,6 +8,7 @@ const theme = {
     fadedHeaderText: '#bcbcbc',
     linkBg: '#1111110f',
     success: '#00b376',
+    info: '#0063FB',
   },
 };
 

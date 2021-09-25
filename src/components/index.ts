@@ -6,3 +6,4 @@ export { default as NavIcon } from './navIcon';
 export { default as NavHeader } from './navHeader';
 export { default as UserNavbar } from './userNavbar';
 export { default as RoundButton } from './roundButton';
+export { default as ContentHeader } from './contentHeader';

@@ -8,6 +8,7 @@ const NavHeader = styled.h3`
   letter-spacing: 0.52px;
   font-weight: 600;
   color: ${(props) => props.theme.palette.fadedHeaderText};
+  font-size: 16px;
 `;
 
 export default NavHeader;
