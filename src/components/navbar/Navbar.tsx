@@ -20,14 +20,16 @@ const Nav = styled.nav`
     padding: 13px 20px;
 
     &:hover {
-      background: ${(props) => props.theme.palette.linkHoverBg} 0% 0% no-repeat
+      text-shadow: 0px 0px 1px ${(props) => props.theme.palette.headerText};
+      background: ${(props) => props.theme.palette.linkBg} 0% 0% no-repeat
         padding-box;
       color: ${(props) => props.theme.palette.headerText};
     }
   }
 
   .active {
-    background: ${(props) => props.theme.palette.linkHoverBg} 0% 0% no-repeat
+    text-shadow: 0px 0px 1px ${(props) => props.theme.palette.headerText};
+    background: ${(props) => props.theme.palette.linkBg} 0% 0% no-repeat
       padding-box;
     color: ${(props) => props.theme.palette.headerText};
   }

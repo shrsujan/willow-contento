@@ -5,7 +5,8 @@ const theme = {
     headerText: '#333333',
     fadedText: '#3333336E',
     normalText: '#333333c7',
-    linkHoverBg: '#1111110f',
+    fadedHeaderText: '#bcbcbc',
+    linkBg: '#1111110f',
     success: '#00b376',
   },
 };

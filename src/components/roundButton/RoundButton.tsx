@@ -18,6 +18,7 @@ const RoundButton = styled.button<IRoundButton>`
       case 'success':
         return props.theme.palette.success;
 
+      case 'profile':
       default:
         return 'none';
     }

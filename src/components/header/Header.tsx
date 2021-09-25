@@ -16,6 +16,7 @@ const HeaderWrapper = styled.div`
   padding: 16px 32px;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
 `;
 
 const Header: React.FC<{}> = () => {
