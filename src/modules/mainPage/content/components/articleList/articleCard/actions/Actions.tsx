@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
+import { useRecoilValue, useRecoilState } from 'recoil';
 
+import { IArticle } from 'response';
 import bookmarkIcon from 'assets/icons/bookmark.svg';
 import moreMenuIcon from 'assets/icons/more_menu.svg';
 import thumbsdownIcon from 'assets/icons/thumbsdown.svg';
+import bookmarkSolidIcon from 'assets/icons/bookmark_solid_white.svg';
+import { bookmarksState, bookmarkedIdsState } from 'modules/mainPage/store';
 
 import { Button, RoundButton } from 'components';
 
@@ -14,6 +18,9 @@ const ICONS = {
   },
   bookmark: {
     src: bookmarkIcon,
+  },
+  bookmarkSolid: {
+    src: bookmarkSolidIcon,
   },
   moreMenu: {
     src: moreMenuIcon,
@@ -84,15 +91,20 @@ const ActionButton = styled(RoundButton)`
 
 interface IActionItem {
   title: string;
+  onClick?: VoidFunction;
   iconName: keyof typeof ICONS;
 }
 
-const ActionItem: React.FC<IActionItem> = ({ title, iconName }) => {
+const ActionItem: React.FC<IActionItem> = ({
+  title,
+  iconName,
+  onClick = () => {},
+}) => {
   const { src } = ICONS[iconName];
 
   return (
     <>
-      <ActionButton data-tip data-for={title}>
+      <ActionButton data-tip data-for={title} onClick={onClick}>
         <img src={src} alt={title} />
       </ActionButton>
       <ReactTooltip id={title} place="top" effect="solid" className="tooltip">
@@ -102,7 +114,28 @@ const ActionItem: React.FC<IActionItem> = ({ title, iconName }) => {
   );
 };
 
-const Actions: React.FC<{}> = () => {
+interface IActions {
+  article: IArticle;
+}
+
+const Actions: React.FC<IActions> = ({ article }) => {
+  const bookmarkedIds = useRecoilValue(bookmarkedIdsState);
+  const [bookmarks, setBookmarks] = useRecoilState(bookmarksState);
+
+  const isBookmarked = bookmarkedIds.find((id) => article.id === id);
+
+  const saveForLater = () => {
+    setBookmarks([...bookmarks, article]);
+  };
+
+  const removeFromBookmarks = () => {
+    const remainingBookmarks = bookmarks.filter(
+      (bookmark) => bookmark.id !== article.id
+    );
+
+    setBookmarks(remainingBookmarks);
+  };
+
   return (
     <Wrapper>
       <div className="overlay" />
@@ -110,7 +143,19 @@ const Actions: React.FC<{}> = () => {
         <Button variant="post">Post now</Button>
         <div className="action-items">
           <ActionItem iconName="thumbsdown" title="Dislike" />
-          <ActionItem iconName="bookmark" title="Save for later" />
+          {isBookmarked ? (
+            <ActionItem
+              iconName="bookmarkSolid"
+              title="Remove from bookmarks"
+              onClick={removeFromBookmarks}
+            />
+          ) : (
+            <ActionItem
+              iconName="bookmark"
+              title="Save for later"
+              onClick={saveForLater}
+            />
+          )}
           <ActionItem iconName="moreMenu" title="View details" />
         </div>
       </div>

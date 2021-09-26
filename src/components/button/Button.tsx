@@ -46,7 +46,7 @@ const Button = styled.button<IButton>`
           background-color: transparent;
           color: ${props.theme.palette.normalText};
 
-          &:hover {
+          &:hover, &.active {
             font-weight: 600;
             color: ${props.theme.palette.headerText};
             background-color: ${props.theme.palette.linkBg};

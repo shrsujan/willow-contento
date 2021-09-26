@@ -89,7 +89,7 @@ const ArticleCard: React.FC<IArticleCard> = ({ article }) => {
   return (
     <Card image={image}>
       <div className="image__container">
-        <Actions />
+        <Actions article={article} />
       </div>
       <div className="source">
         <img src={icon} alt={title} />

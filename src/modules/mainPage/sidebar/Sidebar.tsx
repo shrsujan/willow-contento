@@ -1,5 +1,9 @@
-import React from 'react';
 import styled from 'styled-components';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useRecoilState, useResetRecoilState } from 'recoil';
+
+import { currentViewState } from '../store';
 
 import { SidebarLayout } from 'layouts';
 import { Button, NavIcon, NavHeader } from 'components';
@@ -33,10 +37,27 @@ const SidebarFooter = styled.div`
 `;
 
 const Sidebar: React.FC<{}> = () => {
+  const [currentView, setCurrentView] = useRecoilState(currentViewState);
+  const resetCurrentView = useResetRecoilState(currentViewState);
+  const { pathname } = useLocation();
+
+  const onViewChange = (view: typeof currentView) => {
+    setCurrentView(view);
+  };
+
+  useEffect(() => {
+    resetCurrentView();
+  }, [resetCurrentView, pathname]);
+
   return (
     <SidebarLayout>
       <TopNav>
-        <Button alignContent="left" fullWidth={true}>
+        <Button
+          alignContent="left"
+          fullWidth={true}
+          onClick={() => onViewChange('forYou')}
+          className={currentView === 'forYou' ? 'active' : ''}
+        >
           <NavIcon iconName="home" alt="For you" />
           For you
         </Button>
@@ -48,7 +69,12 @@ const Sidebar: React.FC<{}> = () => {
 
       <FilterNav>
         <NavHeader>Filters</NavHeader>
-        <Button alignContent="left" fullWidth={true}>
+        <Button
+          alignContent="left"
+          fullWidth={true}
+          onClick={() => onViewChange('bookmarks')}
+          className={currentView === 'bookmarks' ? 'active' : ''}
+        >
           <NavIcon iconName="bookmark" alt="Saved for later" />
           Saved for later
         </Button>
