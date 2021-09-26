@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { IArticle } from 'response';
 
@@ -47,14 +48,18 @@ const Card = styled.div<ICard>`
       border: 1px solid ${(props) => props.theme.palette.blackBorder};
     }
 
-    h4 {
-      margin: unset;
-      padding: unset;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.39px;
-      text-transform: uppercase;
-      color: ${(props) => props.theme.palette.normalText};
+    a {
+      text-decoration: none;
+
+      h4 {
+        margin: unset;
+        padding: unset;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.39px;
+        text-transform: uppercase;
+        color: ${(props) => props.theme.palette.normalText};
+      }
     }
   }
 
@@ -84,7 +89,7 @@ interface IArticleCard {
 }
 
 const ArticleCard: React.FC<IArticleCard> = ({ article }) => {
-  const { icon, image, title, sourceTitle, description } = article;
+  const { favicon, image, title, sourceTitle, description, domain } = article;
 
   return (
     <Card image={image}>
@@ -92,8 +97,10 @@ const ArticleCard: React.FC<IArticleCard> = ({ article }) => {
         <Actions article={article} />
       </div>
       <div className="source">
-        <img src={icon} alt={title} />
-        <h4>{sourceTitle}</h4>
+        <img src={favicon} alt={title} />
+        <Link to={{ pathname: domain }} target="_blank">
+          <h4>{sourceTitle}</h4>
+        </Link>
       </div>
       <h2>{title}</h2>
       <p>{description}</p>
